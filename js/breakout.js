@@ -1,6 +1,7 @@
 rules = document.getElementById('rules-btn')
 hiderules = document.getElementById('close-btn')
 toggle = document.querySelector('.rules')
+score = 0
 
 
 // Rules open and close event handlers
@@ -37,8 +38,6 @@ function drawBall() {
     ctx.closePath()
 }
 
-drawBall()
-
 
 // Create paddle properties
 paddle = {
@@ -49,3 +48,30 @@ paddle = {
     speed: 8,
     dx: 0,
 }
+
+
+// Draw paddle on canvas
+function drawPaddle() {
+    ctx.beginPath()
+    ctx.rect(paddle.x,paddle.y,paddle.w,paddle.h)
+    ctx.fillStyle = '#0095dd'
+    ctx.fill()
+    ctx.closePath()
+}
+
+
+// Draw score on canvas
+function drawScore() {
+    ctx.font = '20px Arial'
+    ctx.fillText(`Score: ${score}`, canvas.width-100, 30)
+}
+
+
+// Draw everything
+function draw() {
+    drawPaddle()
+    drawBall()
+    drawScore()
+}
+
+draw()
