@@ -109,10 +109,57 @@ function drawBricks() {
 
 // Draw everything
 function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height)
     drawPaddle()
     drawBall()
     drawScore()
     drawBricks()
 }
 
-draw()
+
+// Move paddle on canvas
+function movePaddle() {
+    paddle.x = paddle.x + paddle.dx
+
+    // Wall detection
+    if (paddle.x < 0) {
+        paddle.x = 0
+    }
+    if (paddle.x + paddle.w > canvas.width) {
+        paddle.x = canvas.width - paddle.w
+    }
+}
+
+
+// Keydown Event
+function keyDown(e) {
+    if (e.key == 'ArrowRight' || e.key == 'Right') {
+        paddle.dx = paddle.speed
+    }
+    if (e.key == 'ArrowLeft' || e.key == 'Left') {
+        paddle.dx = -(paddle.speed)
+    }
+}
+
+// Keyup Event
+function keyUp(e) {
+    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'ArrowLeft' || e.key == 'Left')
+    {
+        paddle.dx = 0
+    }
+}
+
+
+// Keyboard event handlers
+document.addEventListener('keydown', keyDown)
+document.addEventListener('keyup', keyUp)
+
+
+// Update canvas drawing and animation
+function update() {
+    movePaddle()
+    draw()
+    requestAnimationFrame(update)
+}
+
+update()
