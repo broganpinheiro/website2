@@ -1,7 +1,14 @@
 rules = document.getElementById('rules-btn')
 hiderules = document.getElementById('close-btn')
 toggle = document.querySelector('.rules')
+
+const canvas = document.getElementById('canvas')
+const ctx = canvas.getContext('2d')
+
 score = 0
+
+brickRowCount = 9
+brickColumnCount = 5
 
 
 // Rules open and close event handlers
@@ -12,10 +19,6 @@ rules.addEventListener('click', () => {
 hiderules.addEventListener('click', () => {
     toggle.classList.remove('show')
 })
-
-
-const canvas = document.getElementById('canvas')
-const ctx = canvas.getContext('2d')
 
 
 // Create ball properties
@@ -29,16 +32,6 @@ ball = {
 }
 
 
-// Draw ball on canvas
-function drawBall() {
-    ctx.beginPath()
-    ctx.arc(ball.x,ball.y,ball.size,0,Math.PI * 2)
-    ctx.fillStyle = '#0095dd'
-    ctx.fill()
-    ctx.closePath()
-}
-
-
 // Create paddle properties
 paddle = {
     x: canvas.width / 2 - 40,
@@ -48,6 +41,39 @@ paddle = {
     speed: 8,
     dx: 0,
 }
+
+
+// Create brick properties
+brickInfo = {
+    w: 70,
+    h: 20,
+    padding: 10,
+    offsetX: 45,
+    offsetY: 60,
+    visible: true
+}
+
+
+// Create bricks
+bricks =[]
+for (let i = 0; i < brickRowCount; i++) {
+    bricks[i] = []
+    for (let j = 0; j < brickColumnCount; j++) {
+        const x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetX
+        const y = j * (brickInfo.h + brickInfo.padding) + brickInfo.offsetY
+        bricks[i][j] = {x, y, ...brickInfo}
+    }
+}
+
+// Draw ball on canvas
+function drawBall() {
+    ctx.beginPath()
+    ctx.arc(ball.x,ball.y,ball.size,0,Math.PI * 2)
+    ctx.fillStyle = '#0095dd'
+    ctx.fill()
+    ctx.closePath()
+}
+
 
 
 // Draw paddle on canvas
@@ -67,11 +93,26 @@ function drawScore() {
 }
 
 
+// Draw bricks on canvas
+function drawBricks() {
+    bricks.forEach(column => {
+        column.forEach(brick => {
+            ctx.beginPath()
+            ctx.rect(brick.x, brick.y, brick.w, brick.h)
+            ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';            ctx.fill()
+            ctx.closePath()
+        })
+    })
+}
+
+
+
 // Draw everything
 function draw() {
     drawPaddle()
     drawBall()
     drawScore()
+    drawBricks()
 }
 
 draw()
