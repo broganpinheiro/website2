@@ -1,15 +1,25 @@
 rules = document.getElementById('rules-btn')
 hiderules = document.getElementById('close-btn')
 toggle = document.querySelector('.rules')
+hide = document.querySelector('.startGame')
+start = document.getElementById('start')
 
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
 score = 0
+first = false
+paddleFreeze = false
 
 brickRowCount = 9
 brickColumnCount = 5
 
+// Start game
+start.addEventListener('click', () => {
+    hide.classList.add('hide')
+    hide.classList.remove('btn')
+    startGame()
+})
 
 // Rules open and close event handlers
 rules.addEventListener('click', () => {
@@ -133,17 +143,17 @@ function movePaddle() {
 
 // Keydown Event
 function keyDown(e) {
-    if (e.key == 'ArrowRight' || e.key == 'Right') {
+    if (paddleFreeze == false && e.key == 'ArrowRight' || e.key == 'Right') {
         paddle.dx = paddle.speed
     }
-    if (e.key == 'ArrowLeft' || e.key == 'Left') {
+    if (paddleFreeze == false && e.key == 'ArrowLeft' || e.key == 'Left') {
         paddle.dx = -(paddle.speed)
     }
 }
 
 // Keyup Event
 function keyUp(e) {
-    if (e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'ArrowLeft' || e.key == 'Left')
+    if (paddleFreeze == false && e.key == 'ArrowRight' || e.key == 'Right' || e.key == 'ArrowLeft' || e.key == 'Left')
     {
         paddle.dx = 0
     }
@@ -170,9 +180,11 @@ function moveBall() {
 
     // Wall collision (bottom)
     if (ball.y + ball.size > canvas.height) {
-        ball.dy = -1 * ball.dy
-        showAllBricks()
-        score = 0
+        ball.dy = 0
+        ball.dx = 0
+        hide.classList.add('btn')
+        hide.classList.remove('hide')
+        paddleFreeze = true
     }
 
     // Wall collision (left)
@@ -219,12 +231,19 @@ function increaseScore() {
 
 
 function showAllBricks() {
-    brick.forEach (column => {
+    bricks.forEach(column => {
         column.forEach(brick => {
             brick.visible = true
         })
     })
+
+    ball.x = canvas.width / 2
+    ball.y = canvas.height / 2
+    ball.dx = 4
+    ball.dy = -4
 }
+
+
 
 
 
@@ -236,4 +255,15 @@ function update() {
     requestAnimationFrame(update)
 }
 
-update()
+
+function startGame() {
+    if (first == false) {
+        update()
+        first = true
+    }
+    score = 0
+    showAllBricks()
+    paddleFreeze = false
+    paddle.x = canvas.width/2 - 40
+    paddle.y = canvas.height - 20
+}

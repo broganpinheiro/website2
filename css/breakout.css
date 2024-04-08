@@ -65,3 +65,17 @@ h1 {
 .rules.show {
     transform: translateX(0);
 }
+
+.startGame {
+    position: absolute;
+    left: 50vh;
+    top: 50vh;
+    background-color: black;
+    color: white;
+    text-decoration: bold;
+    padding: 15px;
+}
+
+.hide {
+    opacity: 0;
+}
