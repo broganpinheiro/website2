@@ -141,6 +141,11 @@ h1 {
     transition: transform 0.3s ease-in-out;
 }
 
+.insect img {
+    width: 100px;
+    height: 100px;
+}
+
 .insect.caught {
-    transform: translate (-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
 }
