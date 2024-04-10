@@ -19,5 +19,21 @@ choose_insectPbtns.forEach(btn => {
         const alt = img.getAttribute('alt')
         const src = img.getAttribute('src')
         screens[1].classList.add('up')
+        selected_insect = {src,alt}
+        setTimeout(createInsect, 100)
     })
 })
+
+function createInsect() {
+    const insect = document.createElement('div')
+    insect.classList.add('insect')
+    const {x,y} = getRandomLocation()
+}
+
+function getRandomLocation() {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const x = Math.random() * (width - 200) + 100
+    const y = Math.random() * (height - 200) + 100
+    return {x,y}
+}
