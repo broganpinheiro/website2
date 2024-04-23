@@ -6,6 +6,7 @@ const timeEl = document.getElementById('time')
 const scoreEl = document.getElementById('score')
 const message = document.getElementById('message')
 const won = document.getElementById('winning')
+const loss = document.getElementById('lost')
 let seconds = 0
 let score = 0
 let selected_insect = {}
@@ -66,14 +67,28 @@ function increaseTime() {
     }
     timeEl.innerHTML = `Time: ${m}:${s}`
     seconds++
-    
+    if (score >= 60 && seconds <= 30) {
+        message.classList.remove('visible')
+        setTimeout(winMessage, 500)
+    }
+    if (score < 60 && seconds > 30)
+    {
+        message.classList.remove('visible')
+        setTimeout(lossMessage, 500)
+    }
+}
+
+
+function winMessage() {
+    won.classList.add('visible')
+}
+
+function lossMessage() {
+    loss.classList.add('visible')
 }
 
 function increaseScore() {
     score++
-    if (score > 19) {
-        message.classList.add('visible')
-    }
     scoreEl.innerHTML = `Score: ${score}`
 }
 
