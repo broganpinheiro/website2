@@ -44,13 +44,13 @@ h1 {
 
 .rules-btn {
     position: absolute;
-    top: 30px;
+    top: 120px;
     left: 30px;
 }
 
 .rules {
     position: absolute;
-    top: 20px;
+    top: 0;
     left: 0;
     background-color: #333333;
     color: white;
@@ -68,7 +68,7 @@ h1 {
 
 .startGame {
     position: absolute;
-    left: 50vh;
+    right: 100vh;
     top: 50vh;
     background-color: black;
     color: white;
@@ -139,3 +139,6 @@ h1 {
     display: none;
 }
 
+nav {
+    height: 10px;
+}
