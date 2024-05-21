@@ -50,7 +50,7 @@ h1 {
 
 .rules {
     position: absolute;
-    top: 0;
+    top: 20px;
     left: 0;
     background-color: #333333;
     color: white;
