@@ -61,6 +61,7 @@ function updateWrongLettersEl () {
     if (wrongLetters.length == 6) {
         finalMessage.innerText = 'Unfortunately you lost!'
         popup.style.display = 'flex'
+        window.removeEventListener('keydown', e)
     }
 }
 
@@ -124,3 +125,4 @@ playAgainBtn.addEventListener('click', () => {
 
 
 
+displayWord()
