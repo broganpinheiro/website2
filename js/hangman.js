@@ -5,6 +5,7 @@ const popup = document.getElementById('popup-container')
 const notification = document.getElementById('notification-container')
 const finalMessage = document.getElementById('final-message')
 const figureParts = document.querySelectorAll('.figure-part')
+let won = true
 
 const word = ['application', 'programming', 'interface', 'wizard']
 
@@ -59,9 +60,9 @@ function updateWrongLettersEl () {
 
     // Check if lost
     if (wrongLetters.length == 6) {
-        finalMessage.innerText = `Unfortunately you lost! The correct word is ${selectedWord}`
+        finalMessage.innerText = `Unfortunately you lost! The correct word was ${selectedWord}!`
         popup.style.display = 'flex'
-        bool won = false
+        won = false
     }
 }
 
@@ -80,7 +81,7 @@ function showNotification() {
 
 // Keydown letter press
 window.addEventListener('keydown', e => {
-    if (e.keyCode >= 65 && e.keyCode <=90) {
+    if (e.keyCode >= 65 && e.keyCode <=90 && won) {
         const letter = e.key
 
         if (selectedWord.includes(letter)) {
@@ -109,6 +110,7 @@ window.addEventListener('keydown', e => {
 
 // Resart game and play again
 playAgainBtn.addEventListener('click', () => {
+    won = true
     correctLetters.length = 0
     wrongLetters.length = 0
 
