@@ -124,3 +124,60 @@ h1 {
 .notification-container.show {
     transform: translate(-50px);
 }
+
+
+.website {
+    position: fixed;
+    background-color: #111;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.website .ccontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.website ul {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.website a {
+    color: white;
+    text-decoration: none;
+    padding: 7px 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.website.active {
+    background-color: white;
+    box-shadow: 0 2px 10 rgba(0,0,0,.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.website.active a {
+    color: black;
+}
+
+.website.active .ccontainer {
+    padding: 10px 0;
+}
+
+.website a.current,
+.website a:hover {
+    color: rgb(192,57,43);
+    font-weight: bold;
+}
+
+.website div.ccontainer.inactive {
+    transition: all 0.3s ease-in-out;
+    display: none;
+}
